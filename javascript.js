@@ -84,7 +84,7 @@ get('/reports/past_day', data => {
 
 get('/reports/pending_tasks', data => {
   const html = data.map(task => `
-    <div class="col s12 m4">
+    <div class="col s12 m3">
       <div class="card horizontal">
         <div class="card-image">
           <img src="/public/washing.png">
@@ -92,9 +92,7 @@ get('/reports/pending_tasks', data => {
         <div class="card-stacked">
           <div class="card-content">
             <p>${task.item.name}</p>
-            <a class="waves-effect waves-light btn-flat">
-              <i class="material-icons left">schedule</i> ${task.date.split(':').slice(0, 2).join(':')}
-            </a>
+            <p>${new Date(task.date).getHours()}:${new Date(task.date).getMinutes()}</p>
           </div>
         </div>
       </div>

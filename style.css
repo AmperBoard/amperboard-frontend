@@ -30,14 +30,17 @@ canvas {
   margin: 0 0 10px;
 }
 
-
-.card.horizontal .card-image {
-  width: 120px;
+.card.horizontal .card-image img {
+  width: 48px;
+  margin: 10px;
 }
 
-.card.horizontal .card-image img {
-  width: 80px;
-  margin: 20px;
+.card.horizontal .card-stacked .card-content {
+  padding: 10px;
+}
+
+.card.horizontal .card-stacked p {
+  margin: 0;
 }
 
 .history .btn-flat {
