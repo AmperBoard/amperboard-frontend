@@ -15,13 +15,14 @@
 <body>
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Amper Board</a>
+      <img class="logo" src="public/logo.svg" />
+      <img class="text" src="public/texto.svg" />
     </div>
     <div class="nav-content">
       <ul class="tabs tabs-transparent">
         <li class="tab"><a href="#test1">Historical</a></li>
         <li class="tab"><a href="#test2">Planning</a></li>
-        <li class="tab"><a href="#test3">Test 3</a></li>
+        <li class="tab"><a href="#test3">Statistics</a></li>
         <li class="tab"><a href="#test4">Settings</a></li>
       </ul>
     </div>
@@ -30,32 +31,39 @@
 
 
 
-  <section id="test1" class="history col s12">
+  <section id="test1" class="history row">
+    <div class="col s9">
+      <h2 class="header">Historic</h2>
+      <canvas id="history"></canvas>
+    </div>
 
-    <h2 class="header">Upcoming</h2>
-    <div class="pending items row"></div>
-
-    <h2 class="header">Historic</h2>
-    <canvas id="history"></canvas>
+    <div class="upcoming col s3">
+      <h2 class="header">Upcoming tasks</h2>
+      <div class="pending items row"></div>
+    </div>
   </section>
 
 
-  <section id="test2" class="plan col s12">
-    <h2 class="header">Planificación semanal</h2>
-    <div class="week">
-      <div class="day drop monday"></div>
-      <div class="day drop tuesday"></div>
-      <div class="day drop wednesday"></div>
-      <div class="day drop thursday"></div>
-      <div class="day drop friday"></div>
-      <div class="day drop saturday"></div>
-      <div class="day drop sunday"></div>
+  <section id="test2" class="plan row">
+    <div class="col s12">
+      <h2 class="header">
+        Weekly plan
+        <a class="btn waves-effect right">Ask Amper</a>
+      </h2>
+      <div class="week">
+        <div class="day drop monday"></div>
+        <div class="day drop tuesday"></div>
+        <div class="day drop wednesday"></div>
+        <div class="day drop thursday"></div>
+        <div class="day drop friday"></div>
+        <div class="day drop saturday"></div>
+        <div class="day drop sunday"></div>
+      </div>
+
+      <div class="estimation"></div>
     </div>
-
-    <div class="estimation"></div>
-
-    <h2 class="header">Histórico</h2>
-    <canvas id="history"></canvas>
+    <div class="col s3">
+    </div>
 
   </section>
   <section id="test3" class="col s12">Test 3</section>
