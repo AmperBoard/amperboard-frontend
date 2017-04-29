@@ -23,7 +23,7 @@ const post = (path, callback) => {
 };
 
 get('/items', data => {
-  const items = data.sort((a, b) => b.consumption - a.consumption).filter(a => a.consumption > 350);
+  const items = data.sort((a, b) => b.consumption - a.consumption).filter(a => a.consumption > 400);
   const html = items.map(item => `
     <div class="item item-${item.id} col s12 m2" style="height: ${item.consumption / 10}px; background: ${chance.color({format: 'rgb'}).replace(/\)/, ', 0.3)')};">
       <img src="public/washing.png">
