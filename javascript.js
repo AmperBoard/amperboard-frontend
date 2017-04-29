@@ -22,7 +22,34 @@ get('/items', data => {
 });
 
 get('/reports/past_day', data => {
-  console.log(data);
+  data = data.map(one => {
+    if (typeof one.time === 'string') {
+      one.hour = +one.time.split(':')[0];
+      const date = new Date();
+      date.setHours(one.time.split(':')[0]);
+      date.setMinutes(one.time.split(':')[1]);
+      one.time = date;
+    }
+    return one;
+  });
+
+  const grouped = [];
+
+  for (let h = 0; h < 24; h++) {
+    grouped[h] = data.filter(item => item.hour === h);
+  }
+
+  const coor = grouped.reduce((obj, range, x) => {
+    obj[x] = {
+      x,
+      y: range.reduce((total, item) => {
+        return total + item.consumption;
+      }, 0)
+    };
+    return obj;
+  }, []);
+
+  console.log(coor);
 
   // Any of the following formats may be used
   var ctx = document.getElementById('history');
@@ -30,17 +57,8 @@ get('/reports/past_day', data => {
       type: 'line',
       data: {
           datasets: [{
-              label: 'Scatter Dataset',
-              data: [{
-                  x: -10,
-                  y: 0
-              }, {
-                  x: 0,
-                  y: 10
-              }, {
-                  x: 10,
-                  y: 5
-              }],
+              label: 'Hourly consumption',
+              data: coor,
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
               borderColor: 'rgba(255,99,132,1)',
           }]
