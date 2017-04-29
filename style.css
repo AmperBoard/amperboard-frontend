@@ -12,6 +12,10 @@ nav {
   bottom: 0;
 }
 
+.header {
+  font-size: 2em;
+}
+
 nav .brand-logo {
   padding: 0 24px;
 }
