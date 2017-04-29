@@ -101,9 +101,8 @@ canvas {
 .estimation img {
   position: absolute;
   bottom: 5px;
-  width: 30px;
-  left: 50%;
-  margin-left: -15px;
+  width: 50px;
+  left: 5px;
   display: inline-block;
 }
 

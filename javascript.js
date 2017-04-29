@@ -23,10 +23,10 @@ const post = (path, callback) => {
 };
 
 get('/items', data => {
-  const items = data.sort((a, b) => b.consumption - a.consumption).filter(a => a.consumption > 400);
+  const items = data.sort((a, b) => b.consumption - a.consumption).filter(a => a.consumption > 500);
   const html = items.map(item => `
     <div class="item item-${item.id} draggable col s12 m2" style="height: ${item.consumption / 10}px; background: ${chance.color({format: 'rgb'}).replace(/\)/, ', 0.3)')};">
-      <img src="public/washing.png">
+      <img src="public/${item.name}.png">
     </div>
   `).join('');
   $('.plan .estimation').html(html);
@@ -84,7 +84,7 @@ get('/reports/pending_tasks', data => {
     <div class="col s12 m3">
       <div class="card horizontal">
         <div class="card-image">
-          <img src="/public/washing.png">
+          <img src="/public/${task.item.name}.png">
         </div>
         <div class="card-stacked">
           <div class="card-content">
