@@ -36,7 +36,6 @@ get('/reports/past_day', data => {
   data = data.map(one => {
     if (typeof one.time === 'string') {
       one.time = new Date(one.time);
-      one.hour = date.getHours();
     }
     return one;
   });
@@ -44,7 +43,7 @@ get('/reports/past_day', data => {
   const grouped = [];
 
   for (let h = 0; h < 24; h++) {
-    grouped[h] = data.filter(item => item.hour === h);
+    grouped[h] = data.filter(item => one.time.getHours() === h);
   }
 
   const coor = grouped.reduce((obj, range, x) => {
@@ -56,8 +55,6 @@ get('/reports/past_day', data => {
     };
     return obj;
   }, []);
-
-  console.log(coor);
 
   // Any of the following formats may be used
   var ctx = document.getElementById('history');
