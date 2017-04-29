@@ -1,6 +1,24 @@
 $('.button-collapse').sideNav();
 
-$.ajax('https://api.amperboard.com/');
+$.get('https://amper.herokuapp.com/', function(e){
+  console.log(arguments);
+});
+
+
+$.ajax({
+  url: "https://amper.herokuapp.com/",
+  type: "GET",
+  crossDomain: true,
+  data: JSON.stringify({ a: 'b' }),
+  dataType: "json",
+  success: function (response) {
+      var resp = JSON.parse(response)
+      alert(resp.status);
+  },
+  error: function (xhr, status) {
+      alert("error");
+  }
+});
 
 // Any of the following formats may be used
 var ctx = document.getElementById('history');
