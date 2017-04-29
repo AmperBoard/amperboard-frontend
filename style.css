@@ -2,6 +2,14 @@
 
 nav {
   background: #0091EA;
+  position: relative;
+}
+
+.nav-content {
+  width: auto;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 nav .brand-logo {
@@ -32,6 +40,124 @@ canvas {
   margin: 20px;
 }
 
-.plan .btn-flat {
+.history .btn-flat {
   padding: 0 .6rem;
+}
+
+
+
+.estimation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.week {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.day {
+  width: 13.28%;
+  height: 100px;
+  margin-right: 1%;
+  flex: 1 1 auto;
+  align-self: flex-end;
+  align-content: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: .3em;
+}
+
+.drop .item,
+.estimation .item {
+  flex: 1 1 auto;
+  background: #eee;
+  align-self: flex-end;
+  position: relative;
+  margin: 0 10px 10px 0;
+}
+
+.day .item {
+  width: 100%;
+}
+
+.drop p,
+.estimation p {
+  position: absolute;
+  bottom: 5px;
+  margin: 0;
+}
+
+.drop img,
+.estimation img {
+  position: absolute;
+  bottom: 5px;
+  width: 30px;
+  left: 50%;
+  margin-left: -15px;
+  display: inline-block;
+}
+
+.drop .item span,
+.estimation .item span {
+  vertical-align: super;
+}
+
+.drop {
+  height: 300px;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.day {
+  position: relative;
+}
+
+.day::before {
+  position: absolute;
+  top: -25px;
+  width: 100%;
+  text-align: center;
+}
+
+.day.monday::before {
+  content: 'Monday';
+}
+
+.day.tuesday::before {
+  content: 'Tuesday';
+}
+
+.day.wednesday::before {
+  content: 'Wednesday';
+}
+
+.day.thursday::before {
+  content: 'Thursday';
+}
+
+.day.friday::before {
+  content: 'Friday';
+}
+
+.day.saturday::before {
+  content: 'Saturday';
+}
+
+.day.sunday::before {
+  content: 'Sunday';
+}
+
+.estimate {
+  margin-top: 20px;
+}
+
+.drop .item {
+  margin-right: 0;
+  margin-bottom: 0;
 }

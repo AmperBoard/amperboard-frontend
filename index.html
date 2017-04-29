@@ -13,14 +13,9 @@
   </head>
 
   <body>
-    <nav class="nav-extended">
+    <nav>
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">Amper Board</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="sass.html">Sass</a></li>
-          <li><a href="badges.html">Components</a></li>
-          <li><a href="collapsible.html">JavaScript</a></li>
-        </ul>
       </div>
       <div class="nav-content">
         <ul class="tabs tabs-transparent">
@@ -31,9 +26,12 @@
       </div>
     </nav>
 
-    <section id="test1" class="plan col s12">
-      <h2 class="header">Planificación diaria</h2>
-      <div class="row">
+
+
+
+    <section id="test1" class="history col s12">
+      <h2 class="header">Próximas tareas</h2>
+      <div class="items row">
         <div class="col s12 m4">
           <div class="card horizontal">
             <div class="card-image">
@@ -81,7 +79,24 @@
     </section>
 
 
-    <section id="test2" class="col s12">Test 2</section>
+    <section id="test2" class="plan col s12">
+      <h2 class="header">Planificación semanal</h2>
+      <div class="week">
+        <div class="day drop monday"></div>
+        <div class="day drop tuesday"></div>
+        <div class="day drop wednesday"></div>
+        <div class="day drop thursday"></div>
+        <div class="day drop friday"></div>
+        <div class="day drop saturday"></div>
+        <div class="day drop sunday"></div>
+      </div>
+
+      <div class="estimation"></div>
+
+      <h2 class="header">Histórico</h2>
+      <canvas id="history"></canvas>
+
+    </section>
     <section id="test3" class="col s12">Test 3</section>
 
 
@@ -93,6 +108,8 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+    <script src="https://unpkg.com/dragula@3/dist/dragula.min.js"></script>
+    <script src="https://unpkg.com/chance@1/chance.js"></script>
     <script src="javascript.js"></script>
   </body>
 </html>
