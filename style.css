@@ -1,0 +1,31 @@
+nav .brand-logo {
+  padding: 0 24px;
+}
+
+section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+canvas {
+  width: 100%;
+}
+
+.card.horizontal p {
+  margin: 0 0 10px;
+}
+
+
+.card.horizontal .card-image {
+  width: 120px;
+}
+
+.card.horizontal .card-image img {
+  width: 80px;
+  margin: 20px;
+}
+
+.plan .btn-flat {
+  padding: 0 .6rem;
+}
