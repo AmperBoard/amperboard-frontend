@@ -25,7 +25,7 @@ const post = (path, callback) => {
 get('/items', data => {
   const items = data.sort((a, b) => b.consumption - a.consumption).filter(a => a.consumption > 400);
   const html = items.map(item => `
-    <div class="item item-${item.id} col s12 m2" style="height: ${item.consumption / 10}px; background: ${chance.color({format: 'rgb'}).replace(/\)/, ', 0.3)')};">
+    <div class="item item-${item.id} draggable col s12 m2" style="height: ${item.consumption / 10}px; background: ${chance.color({format: 'rgb'}).replace(/\)/, ', 0.3)')};">
       <img src="public/washing.png">
     </div>
   `).join('');
@@ -35,11 +35,8 @@ get('/items', data => {
 get('/reports/past_day', data => {
   data = data.map(one => {
     if (typeof one.time === 'string') {
-      one.hour = +one.time.split(':')[0];
-      const date = new Date();
-      date.setHours(one.time.split(':')[0]);
-      date.setMinutes(one.time.split(':')[1]);
-      one.time = date;
+      one.time = new Date(one.time);
+      one.hour = date.getHours();
     }
     return one;
   });
