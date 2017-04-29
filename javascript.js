@@ -43,7 +43,7 @@ get('/reports/past_day', data => {
   const grouped = [];
 
   for (let h = 0; h < 24; h++) {
-    grouped[h] = data.filter(item => one.time.getHours() === h);
+    grouped[h] = data.filter(item => item.time.getHours() === h);
   }
 
   const coor = grouped.reduce((obj, range, x) => {
