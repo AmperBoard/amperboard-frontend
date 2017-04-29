@@ -11,6 +11,17 @@ const get = (path, callback) => {
   });
 };
 
+const post = (path, callback) => {
+  path = path.replace(/^\//, '').replace(/\/$/, '');
+  $.ajax({
+    url: `https://api.amperboard.com/${path}/`,
+    type: "POST",
+    crossDomain: true,
+    success: callback,
+    error: console.log.bind(console, 'Error:')
+  });
+};
+
 get('/items', data => {
   const items = data.sort((a, b) => b.consumption - a.consumption).filter(a => a.consumption > 350);
   const html = items.map(item => `
