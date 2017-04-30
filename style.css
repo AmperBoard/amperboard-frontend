@@ -143,6 +143,7 @@ h2,
   cursor: grabbing;
   overflow: hidden;
   color: #eee;
+  transition: all .3s ease;
 }
 
 .day .item {

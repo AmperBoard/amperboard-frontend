@@ -1,5 +1,16 @@
 $('.button-collapse').sideNav();
 
+const ask = {
+  monday: ['Sandwichera', 'Aspiradora'],
+  tuesday: ['Lavavajillas'],
+  wednesday: ['Secador', 'Plancha'],
+  thursday: ['Lavavajillas'],
+  friday: ['Sandwichera', 'Horno'],
+  saturday: ['Cafetera', 'Aire ACC.', 'Lavavajillas'],
+  sunday: ['Televisión', 'Secador', 'Microondas']
+};
+
+
 const get = (path, callback) => {
   path = path.replace(/^\//, '').replace(/\/$/, '');
   $.ajax({
@@ -36,11 +47,29 @@ get('/items', data => {
     </div>
   `).join('');
   $('.plan .estimation').html(html);
+
+  $('.ask').click(e => {
+    let i = 0;
+    const pars = $('.item p').get();
+    for (day in ask) {
+      ask[day].forEach(text => {
+        let items = pars.filter(el => el.innerHTML === text);
+        if (items.length) {
+          ((item, day) => {
+            setTimeout(() => {
+              $(item).closest('.item').clone().appendTo('.day.' + day);
+            }, i * 250);
+            i++;
+          })(items[0], day);
+        }
+      });
+    }
+    $(e.target).remove();
+  });
 });
 
 get('/reports/past_day', data => {
-  get('capacity-hour/past_day', capacity => {
-    console.log(data.map(one => one.time), capacity.map(one => one.hour));
+  get('/capacity-hour/past_day', capacity => {
     data = data.map(one => {
       if (typeof one.time === 'string') {
         one.time = new Date(one.time);
