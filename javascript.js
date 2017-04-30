@@ -90,7 +90,7 @@ get('/reports/past_day', data => {
           return total + Math.abs(item.consumption);
         }, 0)
       };
-      obj[x] = obj[x] / 2;
+      obj[x].y = obj[x].y / 2;
       return obj;
     }, []);
 
