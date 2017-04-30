@@ -120,7 +120,11 @@ get('/reports/past_day', data => {
           scales: {
             xAxes: [{
               type: 'linear',
-              position: 'bottom'
+              position: 'bottom',
+              ticks: {
+                  min: -24,
+                  max: 0
+              }
             }]
           }
         }
