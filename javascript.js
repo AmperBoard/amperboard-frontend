@@ -101,6 +101,7 @@ get('/reports/past_day', data => {
 });
 
 get('/reports/pending_tasks', data => {
+  console.log();
   const html = data.slice(0, 5).map(task => `
     <div class="col s6 m12">
       <div class="card horizontal">
@@ -109,7 +110,7 @@ get('/reports/pending_tasks', data => {
 
             <p>
               <span class="time">
-                ${new Date(task.date).getHours()}:${new Date(task.date).getMinutes()}
+                ${(new Date(task.date)).toTimeString().substr(0,5)}
               </span>
               ${task.item.name}
             </p>
