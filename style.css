@@ -149,7 +149,15 @@ h2,
   top: 0;
   width: 100%;
   position: absolute;
-  background: rgba(255, 0, 0, .3);
+  background-image: repeating-linear-gradient(
+    -55deg,
+    #222,
+    #222 10px,
+    #333 10px,
+    #333 20px
+  );
+  /*background: #ff4081;
+  border-bottom: 3px solid #ff6e40;*/
 }
 
 .card span {

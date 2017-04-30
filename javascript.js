@@ -112,8 +112,8 @@ get('/reports/past_day', data => {
             }, {
                 label: 'Available capacity',
                 data: capacity,
-                backgroundColor: 'rgba(99, 255, 132, 0.2)',
-                borderColor: 'rgba(99,255,132,1)',
+                backgroundColor: 'rgba(100, 255, 218, .2)',
+                borderColor: 'rgb(100, 255, 218)',
             }]
         },
         options: {
