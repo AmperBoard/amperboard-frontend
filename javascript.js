@@ -24,7 +24,7 @@ const post = (path, callback) => {
 };
 
 const color = i => {
-  return `rgb(${parseInt(26 * i + 216 * (1 - i)}), parseInt(${35 * i + 27 * (1 - i)}), parseInt(${126 * i + 96 * (1 - i))})`;
+  return `rgb(${parseInt(26 * i + 216 * (1 - i))}, ${parseInt(35 * i + 27 * (1 - i))}, ${parseInt(126 * i + 96 * (1 - i))})`;
 }
 
 get('/items', data => {
