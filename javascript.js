@@ -153,7 +153,7 @@ setInterval(() => {
       power: '5kw'
     }];
     const html = data.map(item => `
-      <div class="card horizontal col m6">
+      <div class="card horizontal col m4">
         <div class="card-image">
           <img src="public/${item.name}.png">
         </div>
@@ -179,7 +179,7 @@ get('days/week', data => {
   data = data.forEach(item => {
     item.date = new Date(item.date);
     let day = $('.week .day').get(item.date.getDay());
-    $(day).append(`<div class="point" style="top: ${100 - 100 * (item.capacity / max)}px"></div>`);
+    $(day).append(`<div class="point" style="height: ${100 - 100 * (item.capacity / max)}px"></div>`);
   });
 
   console.log(data);

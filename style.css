@@ -70,11 +70,15 @@ h2,
   position: relative;
   padding: 10px 0;
   background: rgba(255, 255, 255, .2);
-  font-size: 26px;
+  font-size: 15px;
 }
 
 .connected .card.horizontal p {
-  margin: 5px;
+  margin: 0 0 3px;
+}
+
+.connected .card.horizontal p + p {
+  margin: 0;
 }
 
 .switch {
@@ -83,8 +87,8 @@ h2,
 
 .connected .card::before {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   top: 10px;
   right: 10px;
   content: '';
@@ -95,9 +99,9 @@ h2,
 
 .card.horizontal .card-image img {
   filter: invert(1);
-  width: 80px;
-  margin-left: 10px;
-  margin-top: 7px;
+  width: 50px;
+  margin-left: 5px;
+  margin-top: 0;
 }
 
 .card.horizontal {
@@ -129,8 +133,11 @@ h2,
   padding: 0 .6rem;
 }
 
-.card {
+.card,
+.card.horizontal {
   margin: .5rem 0;
+  background: rgba(255, 255, 255, .2);
+  color: #fff;
 }
 
 .plan {
@@ -139,13 +146,14 @@ h2,
 }
 
 .plan .point {
-  height: 20px;
-  width: 20px;
-  margin-left: -10px;
-  border-radius: 50%;
+  top: 0;
+  width: 100%;
   position: absolute;
-  background: rgba(255, 0, 0, .7);
-  left: 50%;
+  background: rgba(255, 0, 0, .5);
+}
+
+.card span {
+  vertical-align: sub;
 }
 
 .plan .btn {
