@@ -94,6 +94,7 @@ h2,
 
 .plan {
   margin: 0 10px;
+  width: calc(100% - 30px);
 }
 
 .plan .btn {
@@ -112,18 +113,18 @@ h2,
 .week {
   display: flex;
   flex-wrap: wrap;
-  margin: 50px 0 30px;
+  width: calc(100% - 15px);
+  margin: 50px 0 30px -15px;
 }
 
-.estimation,
-.week {
+.estimation {
   margin-left: 15px;
 }
 
 .day {
   width: 10.28%;
   height: 100px;
-  margin: 0 4% 0 0;
+  margin-left: 30px;
   flex: 1 1 auto;
   align-self: flex-end;
   align-content: flex-end;
@@ -140,6 +141,8 @@ h2,
   position: relative;
   margin: 0 10px 10px 0;
   cursor: grabbing;
+  overflow: hidden;
+  color: #eee;
 }
 
 .day .item {
@@ -155,6 +158,7 @@ h2,
   left: 5px;
   right: 5px;
   margin: 0;
+  font-size: 0.9em;
 }
 
 .drop .consumption,
@@ -164,21 +168,6 @@ h2,
   font-weight: bold;
   width: 100%;
   text-align: center;
-}
-
-.drop img,
-.estimation img {
-  position: absolute;
-  bottom: 5px;
-  width: 50px;
-  left: 5px;
-  display: inline-block;
-}
-
-.draggable span,
-.drop .item span,
-.estimation .item span {
-  vertical-align: super;
 }
 
 .drop {
@@ -233,4 +222,34 @@ h2,
   margin-right: 0;
   margin-bottom: 0;
   border-top: 1px solid rgba(255, 255, 255, .5);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.gu-unselectable{
+  -webkit-user-select:none!important;
+  -moz-user-select:none!important;
+  -ms-user-select:none!important;
+  user-select:none!important
+}
+
+.gu-mirror{
+  display: none;
+}
+
+.gu-transit{
+  opacity:.2;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter:alpha(opacity=20);
 }

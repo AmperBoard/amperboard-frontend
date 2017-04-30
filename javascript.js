@@ -56,7 +56,7 @@ get('/reports/past_day', data => {
 
     const coor = grouped.reduce((obj, range, x) => {
       obj[x] = {
-        x,
+        x: -x,
         y: range.reduce((total, item) => {
           return total + item.consumption;
         }, 0)
@@ -66,7 +66,7 @@ get('/reports/past_day', data => {
 
     console.log(capacity.sort((a, b) => new Date(a.hour) - new Date(b.hour)).map(one => one.hour));
     capacity = capacity.map(data => ({
-      x: new Date(data.hour).getHours(),
+      x: parseInt((new Date(data.hour) - new Date()) / 3600000),
       y: data.capacity
     }));
 
@@ -101,21 +101,15 @@ get('/reports/past_day', data => {
 });
 
 get('/reports/pending_tasks', data => {
-  console.log();
   const html = data.slice(0, 5).map(task => `
-    <div class="col s6 m12">
-      <div class="card horizontal">
-          <!-- <img src="/public/${task.item.name}.png"> -->
-          <div class="card-content">
-
-            <p>
-              <span class="time">
-                ${(new Date(task.date)).toTimeString().substr(0,5)}
-              </span>
-              ${task.item.name}
-            </p>
-          </div>
-        </div>
+    <div class="card horizontal">
+      <div class="card-content">
+        <p>
+          <span class="time">
+            ${(new Date(task.date)).toTimeString().substr(0,5)}
+          </span>
+          ${task.item.name}
+        </p>
       </div>
     </div>
   `).join('');
