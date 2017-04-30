@@ -151,7 +151,7 @@ setInterval(() => {
       <div class="col m4">
         <div class="card horizontal">
           <div class="card-image">
-            <img src="public/${item.name}.png">
+            <img src="/public/${item.name}.png">
           </div>
           <div class="card-content">
             <p>
