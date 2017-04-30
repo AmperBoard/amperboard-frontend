@@ -147,7 +147,7 @@ get('/reports/pending_tasks', data => {
 setInterval(() => {
   // CONNECTED
   get('/items/on_items', data => {
-    const html = data.map(item => `
+    const html = data.filter(item => item.id).map(item => `
       <div class="col m4">
         <div class="card horizontal">
           <div class="card-image">
