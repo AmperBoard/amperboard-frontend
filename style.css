@@ -52,12 +52,13 @@ h2,
   font-size: 1.6em;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  padding-left: 10px;
 }
 
 .upcoming {
   border-left: 1px solid #888;
 }
+
+
 
 .card.horizontal .time {
   display: inline-block;
@@ -65,8 +66,50 @@ h2,
   width: 70px;
 }
 
+.connected .card {
+  position: relative;
+  padding: 10px 0;
+  background: rgba(255, 255, 255, .2);
+  font-size: 26px;
+}
+
+.connected .card.horizontal p {
+  margin: 5px;
+}
+
+.switch {
+  float: right;
+}
+
+.connected .card::before {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  right: 10px;
+  content: '';
+  border-radius: 50%;
+  background: #8f8;
+  color: #fff;
+}
+
+.card.horizontal .card-image img {
+  filter: invert(1);
+  width: 80px;
+  margin-left: 10px;
+  margin-top: 7px;
+}
+
 .card.horizontal {
   color: #555;
+}
+
+.connected .card.horizontal {
+  color: #fff;
+}
+
+.card.horizontal img {
+  padding: 0;
 }
 
 .card.horizontal p {
@@ -74,13 +117,8 @@ h2,
   font-size: .9em;
 }
 
-.card.horizontal .card-image img {
-  width: 48px;
-  margin: 10px;
-}
-
 .card .card-content {
-  padding: 10px 15px;
+  padding: 5px 10px;
 }
 
 .card.horizontal .card-stacked p {
@@ -91,10 +129,23 @@ h2,
   padding: 0 .6rem;
 }
 
+.card {
+  margin: .5rem 0;
+}
 
 .plan {
   margin: 0 10px;
   width: calc(100% - 30px);
+}
+
+.plan .point {
+  height: 20px;
+  width: 20px;
+  margin-left: -10px;
+  border-radius: 50%;
+  position: absolute;
+  background: rgba(255, 0, 0, .7);
+  left: 50%;
 }
 
 .plan .btn {

@@ -1,13 +1,13 @@
 $('.button-collapse').sideNav();
 
 const ask = {
-  monday: ['Sandwichera', 'Aspiradora'],
   tuesday: ['Lavavajillas'],
+  friday: ['Sandwichera', 'Horno'],
+  sunday: ['Televisión', 'Secador', 'Microondas'],
   wednesday: ['Secador', 'Plancha'],
   thursday: ['Lavavajillas'],
-  friday: ['Sandwichera', 'Horno'],
+  monday: ['Sandwichera', 'Aspiradora'],
   saturday: ['Cafetera', 'Aire ACC.', 'Lavavajillas'],
-  sunday: ['Televisión', 'Secador', 'Microondas']
 };
 
 
@@ -144,6 +144,50 @@ get('/reports/pending_tasks', data => {
   `).join('');
   $('.history .pending').html(html);
 });
+
+setInterval(() => {
+  // CONNECTED
+  get('/', data => {
+    data = [{
+      name: 'Lavadora',
+      power: '5kw'
+    }];
+    const html = data.map(item => `
+      <div class="card horizontal col m6">
+        <div class="card-image">
+          <img src="public/${item.name}.png">
+        </div>
+        <div class="card-content">
+          <p>
+            <strong>${item.name}</strong>
+          </p>
+          <p>
+            ${item.power}
+          </p>
+        </div>
+      </div>
+    `).join('');
+    $('.connected').html(html);
+  });
+}, 1000);
+
+
+// Maximum daily
+get('days/week', data => {
+
+  let max = Math.max.apply(Math, data.map(one => one.capacity));
+  data = data.forEach(item => {
+    item.date = new Date(item.date);
+    let day = $('.week .day').get(item.date.getDay());
+    $(day).append(`<div class="point" style="top: ${100 - 100 * (item.capacity / max)}px"></div>`);
+  });
+
+  console.log(data);
+
+  // $('.weekly').html(html);
+});
+
+
 
 dragula($('.day').get());
 $('.drop').each((i, el) => {
