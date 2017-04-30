@@ -30,7 +30,7 @@ const color = i => {
 get('/items', data => {
   const items = data.sort((a, b) => b.consumption - a.consumption).filter(a => a.consumption > 500);
   const html = items.map(item => `
-    <div class="item item-${item.id} draggable col s12 m2" style="background: ${color((item.consumption - 500) / 500)}; height: ${item.consumption / 10}px;">
+    <div class="item item-${item.id} draggable" style="background: ${color((item.consumption - 500) / 500)}; height: ${item.consumption / 10}px;">
       <div class="consumption">${item.consumption} Wh</div>
       <p>${item.name}</p>
     </div>
