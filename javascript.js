@@ -1,13 +1,13 @@
 $('.button-collapse').sideNav();
 
 const ask = {
-  tuesday: ['Lavavajillas'],
-  friday: ['Sandwichera', 'Horno'],
-  sunday: ['Televisión', 'Secador', 'Microondas'],
-  wednesday: ['Secador', 'Plancha'],
-  thursday: ['Lavavajillas'],
-  monday: ['Sandwichera', 'Aspiradora'],
-  saturday: ['Cafetera', 'Aire ACC.', 'Lavavajillas'],
+  tuesday: ['Dishwasher'],
+  friday: ['Sandwich maker', 'Oven'],
+  sunday: ['TV', 'Dryer', 'Microwave'],
+  wednesday: ['Hair dryer', 'Iron'],
+  thursday: ['Coffee maker', 'Dishwasher'],
+  monday: ['Sandwich maker', 'Vacuum cleaner'],
+  saturday: ['Air conditioner', 'Dishwasher'],
 };
 
 
