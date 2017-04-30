@@ -93,8 +93,7 @@ get('/reports/past_day', data => {
       return obj;
     }, []);
 
-    console.log(capacity.sort((a, b) => new Date(a.hour) - new Date(b.hour)).map(one => one.hour));
-    capacity = capacity.map(data => ({
+    capacity = capacity.sort((a, b) => new Date(a.hour) - new Date(b.hour)).map(data => ({
       x: parseInt((new Date(data.hour) - new Date()) / 3600000),
       y: data.capacity
     }));
@@ -147,23 +146,28 @@ get('/reports/pending_tasks', data => {
 
 setInterval(() => {
   // CONNECTED
-  get('/', data => {
+  get('/items/on_items', data => {
     data = [{
-      name: 'Lavadora',
+      name: 'Dryer',
       power: '5kw'
+    }, {
+      name: 'Microwave',
+      power: '7kw'
     }];
     const html = data.map(item => `
-      <div class="card horizontal col m4">
-        <div class="card-image">
-          <img src="public/${item.name}.png">
-        </div>
-        <div class="card-content">
-          <p>
-            <strong>${item.name}</strong>
-          </p>
-          <p>
-            ${item.power}
-          </p>
+      <div class="col m4">
+        <div class="card horizontal">
+          <div class="card-image">
+            <img src="public/${item.name}.png">
+          </div>
+          <div class="card-content">
+            <p>
+              <strong>${item.name}</strong>
+            </p>
+            <p>
+              ${item.power}
+            </p>
+          </div>
         </div>
       </div>
     `).join('');
