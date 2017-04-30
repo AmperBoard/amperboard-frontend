@@ -6,6 +6,10 @@ body {
   background: #424242;
 }
 
+input {
+  color: #333!important;
+}
+
 nav {
   background: #45c1b5;
   position: relative;
@@ -143,6 +147,15 @@ h2,
 .plan {
   margin: 0 10px;
   width: calc(100% - 30px);
+}
+
+.dashboard {
+  width: 100%;
+  max-width: 100%;
+}
+
+.dashboard img {
+  width: 100%;
 }
 
 .plan .point {

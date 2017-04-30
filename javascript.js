@@ -87,7 +87,7 @@ get('/reports/past_day', data => {
       obj[x] = {
         x: -x,
         y: range.reduce((total, item) => {
-          return total + item.consumption;
+          return total + Math.abs(item.consumption);
         }, 0)
       };
       return obj;
