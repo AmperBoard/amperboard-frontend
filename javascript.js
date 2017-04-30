@@ -147,13 +147,6 @@ get('/reports/pending_tasks', data => {
 setInterval(() => {
   // CONNECTED
   get('/items/on_items', data => {
-    data = [{
-      name: 'Dryer',
-      power: '5kw'
-    }, {
-      name: 'Microwave',
-      power: '7kw'
-    }];
     const html = data.map(item => `
       <div class="col m4">
         <div class="card horizontal">
@@ -165,7 +158,7 @@ setInterval(() => {
               <strong>${item.name}</strong>
             </p>
             <p>
-              ${item.power}
+              ${item.consumption}
             </p>
           </div>
         </div>
