@@ -75,7 +75,7 @@ get('/items', data => {
 });
 
 get(`/historical-consumption/?timestamp=${parseInt(+new Date() / 1000)}&days=1`, data => {
-  get(`/historical-generation/?timestamp=${parseInt(+new Date() / 1000)}`, generated => {
+  get(`/historical-generation/?timestamp=${parseInt(+new Date() / 1000)}&days=1`, generated => {
     data = data.map(one => {
       if (typeof one.start_time === 'string') {
         one.start_time = new Date(one.start_time);
