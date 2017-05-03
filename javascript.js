@@ -53,7 +53,7 @@ get('/items', data => {
 
   $('.ask').click(e => {
     setTimeout(() => {
-      Materialize.toast('!', 10000);
+      Materialize.toast('You have an available empty spot on Tuesday!', 3000);
     }, 1000);
     let i = 0;
     var pars = $('.item p').get();
