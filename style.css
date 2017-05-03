@@ -348,8 +348,15 @@ h2,
   border-top: 1px solid rgba(255, 255, 255, .5);
 }
 
+#settings .card-panel {
+  background: rgba(255, 255, 255, .8);
+}
 
 
+.toast {
+  background: #fff;
+  color: #333;
+}
 
 
 

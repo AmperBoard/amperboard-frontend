@@ -52,6 +52,9 @@ get('/items', data => {
   $('.plan .estimation').html(html);
 
   $('.ask').click(e => {
+    setTimeout(() => {
+      Materialize.toast('Hello world!', 10000);
+    }, 1000);
     let i = 0;
     var pars = $('.item p').get();
     for (day in ask) {
@@ -61,7 +64,7 @@ get('/items', data => {
           ((item, day) => {
             setTimeout(() => {
               $(item).closest('.item').clone().appendTo('.day.' + day);
-            }, i * 250);
+            }, i * 100);
             i++;
           })(items[0], day);
         }
