@@ -53,7 +53,7 @@ get('/items', data => {
 
   $('.ask').click(e => {
     setTimeout(() => {
-      Materialize.toast('Hello world!', 10000);
+      Materialize.toast('!', 10000);
     }, 1000);
     let i = 0;
     var pars = $('.item p').get();
@@ -74,11 +74,11 @@ get('/items', data => {
   });
 });
 
-get('/reports/past_day', data => {
-  get('/historical-generation/?timestamp=1493821820', capacity => {
+get(`/historical-consumption/?timestamp=${parseInt(+new Date() / 1000)}&days=1`, data => {
+  get(`/historical-generation/?timestamp=${parseInt(+new Date() / 1000)}`, generated => {
     data = data.map(one => {
-      if (typeof one.time === 'string') {
-        one.time = new Date(one.time);
+      if (typeof one.start_time === 'string') {
+        one.start_time = new Date(one.start_time);
       }
       return one;
     });
@@ -86,7 +86,7 @@ get('/reports/past_day', data => {
     var grouped = [];
 
     for (let h = 0; h < 24; h++) {
-      grouped[h] = data.filter(item => item.time.getHours() === h);
+      grouped[h] = data.filter(item => item.start_time.getHours() === h);
     }
 
     var coor = grouped.reduce((obj, range, x) => {
@@ -100,7 +100,7 @@ get('/reports/past_day', data => {
       return obj;
     }, []);
 
-    capacity = capacity.sort((a, b) => new Date(a.hour) - new Date(b.hour)).map(data => ({
+    generated = generated.sort((a, b) => new Date(a.hour) - new Date(b.hour)).map(data => ({
       x: -data.hour,
       y: parseInt(data.energy)
     }));
@@ -117,8 +117,8 @@ get('/reports/past_day', data => {
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255,99,132,1)',
             }, {
-                label: 'Available capacity',
-                data: capacity,
+                label: 'Available generated',
+                data: generated,
                 backgroundColor: 'rgba(100, 255, 218, .2)',
                 borderColor: 'rgb(100, 255, 218)',
             }]
@@ -137,6 +137,11 @@ get('/reports/past_day', data => {
         }
     });
   });
+});
+
+console.log('1493821820', parseInt(+new Date() / 1000));
+get(`/historical-consumption/?timestamp=${parseInt(+ (new Date() / 1000))}&days=30`, data => {
+  console.log(data);
 });
 
 get('/reports/pending_tasks', data => {
@@ -162,14 +167,17 @@ setInterval(() => {
       <div class="col m4">
         <div class="card horizontal">
           <div class="card-image">
-            <img src="/public/${item.name}.png">
+            <!-- <img src="/public/${item.name}.png"> -->
+            <img src="/public/Microwave.png">
           </div>
           <div class="card-content">
             <p>
-              <strong>${item.name}</strong>
+              <!-- <strong>${item.name}</strong> -->
+              <strong>Microwave</strong>
             </p>
             <p>
-              ${item.consumption}
+              <!-- ${item.consumption}W -->
+              700W
             </p>
           </div>
         </div>

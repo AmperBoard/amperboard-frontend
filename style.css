@@ -26,6 +26,7 @@ nav .logo {
 
 nav .text {
   width: 140px;
+  margin-right: 22px;
 }
 
 .nav-content {
@@ -349,7 +350,11 @@ h2,
 }
 
 #settings .card-panel {
-  background: rgba(255, 255, 255, .8);
+  background: rgba(255, 255, 255, .9);
+}
+
+#settings h3.header {
+  color: #333;
 }
 
 
