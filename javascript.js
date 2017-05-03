@@ -97,14 +97,10 @@ get('/reports/past_day', data => {
       return obj;
     }, []);
 
-    console.log(JSON.stringify(capacity));
-
     capacity = capacity.sort((a, b) => new Date(a.hour) - new Date(b.hour)).map(data => ({
       x: -data.hour,
-      y: parseInt(data.hour === 7 ? 3000 : data.hour === 21 ? 2000 : data.radiation)
+      y: parseInt(data.energy)
     }));
-
-    console.log(capacity);
 
     // Any of the following formats may be used
     var ctx = document.getElementById('history');
@@ -286,8 +282,10 @@ function geolocate() {
   }
 }
 
+console.log($('form.settings'));
 
-$('form.settings').submit(function(e){
+$('form.settings').on('submit', function(e){
+  console.log('TU PUUUU');
   e.preventDefault();
   post('user-config', $(e.target).serialize(), function(e){
     window.location.reload();
