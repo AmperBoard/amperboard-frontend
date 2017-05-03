@@ -1,6 +1,6 @@
 $('.button-collapse').sideNav();
 
-const ask = {
+var ask = {
   tuesday: ['Dishwasher'],
   friday: ['Sandwich maker', 'Oven'],
   sunday: ['TV', 'Dryer', 'Microwave'],
@@ -11,10 +11,11 @@ const ask = {
 };
 
 
-const get = (path, callback) => {
-  path = path.replace(/^\//, '').replace(/\/$/, '');
+var get = (path, callback) => {
+  path = path.replace(/^\//, '').replace(/\/$/, '') + '/';
+  if (/\?/.test(path)) path = path.replace(/\/$/, '');
   $.ajax({
-    url: `https://api.amperboard.com/${path}/`,
+    url: `https://api.amperboard.com/${path}`,
     type: "GET",
     crossDomain: true,
     success: callback,
@@ -23,10 +24,12 @@ const get = (path, callback) => {
 };
 
 
-const post = (path, callback) => {
-  path = path.replace(/^\//, '').replace(/\/$/, '');
+var post = (path, data, callback) => {
+  path = path.replace(/^\//, '').replace(/\/$/, '') + '/';
+  if (/\?/.test(path)) path = path.replace(/\/$/, '');
   $.ajax({
-    url: `https://api.amperboard.com/${path}/`,
+    url: `https://api.amperboard.com/${path}`,
+    data: data,
     type: "POST",
     crossDomain: true,
     success: callback,
@@ -34,13 +37,13 @@ const post = (path, callback) => {
   });
 };
 
-const color = i => {
+var color = i => {
   return `rgb(${parseInt(26 * i + 216 * (1 - i))}, ${parseInt(35 * i + 27 * (1 - i))}, ${parseInt(126 * i + 96 * (1 - i))})`;
 }
 
 get('/items', data => {
-  const items = data.sort((a, b) => b.consumption - a.consumption).filter(a => a.consumption > 500);
-  const html = items.map(item => `
+  var items = data.sort((a, b) => b.consumption - a.consumption).filter(a => a.consumption > 500);
+  var html = items.map(item => `
     <div class="item item-${item.id} draggable" style="background: ${color((item.consumption - 500) / 500)}; height: ${item.consumption / 10}px;">
       <div class="consumption">${item.consumption} Wh</div>
       <p>${item.name}</p>
@@ -50,7 +53,7 @@ get('/items', data => {
 
   $('.ask').click(e => {
     let i = 0;
-    const pars = $('.item p').get();
+    var pars = $('.item p').get();
     for (day in ask) {
       ask[day].forEach(text => {
         let items = pars.filter(el => el.innerHTML === text);
@@ -69,7 +72,7 @@ get('/items', data => {
 });
 
 get('/reports/past_day', data => {
-  get('/capacity-hour/past_day', capacity => {
+  get('/historical-generation/?timestamp=1493821820', capacity => {
     data = data.map(one => {
       if (typeof one.time === 'string') {
         one.time = new Date(one.time);
@@ -77,13 +80,13 @@ get('/reports/past_day', data => {
       return one;
     });
 
-    const grouped = [];
+    var grouped = [];
 
     for (let h = 0; h < 24; h++) {
       grouped[h] = data.filter(item => item.time.getHours() === h);
     }
 
-    const coor = grouped.reduce((obj, range, x) => {
+    var coor = grouped.reduce((obj, range, x) => {
       obj[x] = {
         x: -x,
         y: range.reduce((total, item) => {
@@ -94,10 +97,14 @@ get('/reports/past_day', data => {
       return obj;
     }, []);
 
+    console.log(JSON.stringify(capacity));
+
     capacity = capacity.sort((a, b) => new Date(a.hour) - new Date(b.hour)).map(data => ({
-      x: parseInt((new Date(data.hour) - new Date()) / 3600000),
-      y: data.capacity
+      x: -data.hour,
+      y: parseInt(data.hour === 7 ? 3000 : data.hour === 21 ? 2000 : data.radiation)
     }));
+
+    console.log(capacity);
 
     // Any of the following formats may be used
     var ctx = document.getElementById('history');
@@ -134,7 +141,7 @@ get('/reports/past_day', data => {
 });
 
 get('/reports/pending_tasks', data => {
-  const html = data.slice(0, 5).map(task => `
+  var html = data.slice(0, 5).map(task => `
     <div class="card horizontal">
       <div class="card-content">
         <p>
@@ -152,7 +159,7 @@ get('/reports/pending_tasks', data => {
 setInterval(() => {
   // CONNECTED
   get('/items/on_items', data => {
-    const html = data.filter(item => item.id && item.id !== null).map(item => `
+    var html = data.filter(item => item.id && item.id !== null).map(item => `
       <div class="col m4">
         <div class="card horizontal">
           <div class="card-image">
@@ -191,14 +198,98 @@ get('days/week', data => {
 
 
 
-dragula($('.day').get());
+var drake = dragula($('.day').get(), {
+  removeOnSpill: true
+}).on('drag', function (el) {
+  if (el.classList.contains('point')) {
+    drake.cancel(true);
+  }
+});
+var drakes = [];
 $('.drop').each((i, el) => {
-  dragula([...$('.estimation').get(), el], {
+  drakes[i] = dragula([...$('.estimation').get(), el], {
     copy: function (el, source) {
       return source && $(source).is('.estimation');
     },
     accepts: function (el, target) {
       return target && !$(target).is('.estimation');
     }
+  }).on('over', function(el, container){
+    var available = $(container).height() - $(container).find('.point').height();
+    var used = $(container).find('.item').get().reduce((all, one) => {
+      return all + $(one).height();
+    }, $(el).height());
+    var good = available > used;
+    if (available && !good) {
+      container.classList.add('error');
+    }
+  }).on('out', function(){
+    $('.drop').removeClass('error');
+  }).on('drop', function (el, container) {
+    var available = $(container).height() - $(container).find('.point').height();
+    var used = $(container).find('.item').get().reduce((all, one) => {
+      return all + $(one).height();
+    }, 0);
+    var good = available > used;
+    console.log(available, used, good);
+    if (available && !good) {
+      drakes[i].cancel(true);
+    }
+  });
+});
+
+
+
+
+
+
+
+
+// Google Places
+var placeSearch, autocomplete;
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+  autocomplete = new google.maps.places.Autocomplete(
+    document.getElementById('place'));
+
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  document.querySelector('[name="latitude"]').value = place.geometry.location.lat();
+  document.querySelector('[name="longitude"]').value = place.geometry.location.lng();
+  document.querySelector('[name="place_id"]').value = place.place_id;
+}
+
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+
+
+$('form.settings').submit(function(e){
+  e.preventDefault();
+  post('user-config', $(e.target).serialize(), function(e){
+    window.location.reload();
   });
 });

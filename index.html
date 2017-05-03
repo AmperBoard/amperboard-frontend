@@ -15,16 +15,16 @@
 
 <body>
   <nav>
-    <div class="nav-wrapper">
+    <a href="/" class="nav-wrapper waves-effect waves-light">
       <img class="logo" src="public/logo.svg" />
       <img class="text" src="public/texto.svg" />
-    </div>
+    </a>
     <div class="nav-content">
       <ul class="tabs tabs-transparent">
-        <li class="tab"><a href="#test1">Historical</a></li>
-        <li class="tab"><a href="#test2">Planning</a></li>
-        <li class="tab"><a href="#test3">Statistics</a></li>
-        <li class="tab"><a href="#test4">Settings</a></li>
+        <li class="tab"><a class="waves-effect waves-light" href="#historical">Historical</a></li>
+        <li class="tab"><a class="waves-effect waves-light" href="#planning">Planning</a></li>
+        <li class="tab"><a class="waves-effect waves-light" href="#statistics">Statistics</a></li>
+        <li class="tab"><a class="waves-effect waves-light" href="#settings">Settings</a></li>
       </ul>
     </div>
   </nav>
@@ -32,7 +32,7 @@
 
 
 
-  <section id="test1" class="history row">
+  <section id="historical" class="history row">
     <div class="col s9">
       <h2 class="header">
         Historical
@@ -74,7 +74,7 @@
   </section>
 
 
-  <section id="test2" class="plan row">
+  <section id="planning" class="plan row">
     <h2 class="header">
       Weekly plan
       <a class="btn ask waves-effect right">Ask Amper</a>
@@ -92,50 +92,78 @@
 
     <div class="estimation"></div>
   </section>
-  <section id="test3" class="dashboard">
+
+
+
+
+  <section id="statistics" class="statistics row">
+    <div class="col s4 m4">
+      <div class="content">
+        <p>Top 6 appliances used this month:</p>
+        <div class="container">
+          <div class="row">
+            <div class="col s4 m4"><img src="public/Washing machine.png"/></div>
+            <div class="col s4 m4"><img src="public/Sandwich maker.png"/></div>
+            <div class="col s4 m4"><img src="public/Vacuum cleaner.png"/></div>
+            <div class="col s4 m4"><img src="public/Washing machine.png"/></div>
+            <div class="col s4 m4"><img src="public/Sandwich maker.png"/></div>
+            <div class="col s4 m4"><img src="public/Vacuum cleaner.png"/></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s4 m4">
+      <div class="content">
+        Maximum power
+        <div class="diff up">169kW</div>
+        Battery efficiency
+        <div class="diff down">1.7%</div>
+      </div>
+    </div>
+    <div class="col s4 m4">
+      <div class="content">CCC</div>
+    </div>
     <img src="public/dashboard.png" />
   </section>
-  <section id="test4" class="col s12">
+
+
+
+
+  <section id="settings" class="col s12">
     <div class="row">
       <div class="col card-panel white s12 m12 l8 offset-s0 offset-m0  offset-l2">
+
         <div class="row">
 
-      <form class="col s12">
-        <h3 class="header">Settings</h2>
-        <div class="row">
+          <form method="POST" class="settings col s12">
+            <h3 class="header">Settings</h2>
+            <div class="row">
+              <input type="hidden" name="latitude">
+              <input type="hidden" name="longitude">
+              <input type="hidden" name="place_id">
+              <div class="input-field col s12 m12">
+                <input id="place" placeholder="Enter your full address"
+                  onFocus="geolocate()" type="text" name="address"></input>
+                <label for="latitude">Address of the installation</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 m6">
+                <input id="angle" type="number" value="90" name="solar_panel_angle">
+                <label for="angle">Angle</label>
+              </div>
+              <div class="input-field col s12 m6">
+                <input id="m2" value="0.13" type="number" name="square_meters">
+                <label for="m2">Square meters</label>
+              </div>
+            </div>
+            <button class="btn waves-effect waves-light left" type="submit" name="action">Save
+              <i class="material-icons right">send</i>
+          </button>
 
-          <div class="input-field col s12 m6 ">
-            <input id="latitude" type="text" value="48">
-            <label for="latitude">Latitude</label>
-          </div>
-          <div class="input-field col s12 m6">
-            <input value="0" id="azimut" type="number" value="0">
-            <label for="azimut">AZIMUT</label>
-          </div>
+          </form>
         </div>
-        <div class="row">
-          <div class="input-field col s12 m6">
-            <input id="latitude" type="number" value="90">
-            <label for="latitude">Angle</label>
-          </div>
-          <div class="input-field col s12 m6">
-            <input value="0.13" id="azimut" type="number">
-            <label for="azimut">Reflectance angle</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12 m6">
-            <input id="m2" type="number" value="70">
-            <label for="m2">m2</label>
-          </div>
-        </div>
-        <button class="btn waves-effect waves-light right" type="submit" name="action">Save
-          <i class="material-icons right">send</i>
-      </button>
-
-      </form>
-          </div>
-    </div>
+      </div>
     </div>
   </section>
 
@@ -151,5 +179,7 @@
   <script src="https://unpkg.com/dragula@3/dist/dragula.min.js"></script>
   <script src="https://unpkg.com/chance@1/chance.js"></script>
   <script src="javascript.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu1wU82h6aC1d21I3VP6_nLELLP6gGcZY&libraries=places&callback=initAutocomplete" async defer></script>
+
 </body>
 </html>
